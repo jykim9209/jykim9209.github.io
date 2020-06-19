@@ -1,0 +1,347 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Bi-linear CNN models for fine-grained visual recognition - 정석’s Research Archive</title>
+<meta name="description" content="Key point Bilinear CNN utilizes the orderless descriptors which are more powerful to solve the texture classification than the orderful descriptors which store the additional spatial information.  ">
+
+
+  <meta name="author" content="HYUN, Jeongseok">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="정석's Research Archive">
+<meta property="og:title" content="Bi-linear CNN models for fine-grained visual recognition">
+<meta property="og:url" content="http://localhost:4000/computer_vision/bilinear-CNN-Models-for-Fine-grained-Visual-Recognition/">
+
+
+  <meta property="og:description" content="Key point Bilinear CNN utilizes the orderless descriptors which are more powerful to solve the texture classification than the orderful descriptors which store the additional spatial information.  ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-04-02T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/computer_vision/bilinear-CNN-Models-for-Fine-grained-Visual-Recognition/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HYUN, Jeongseok",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="정석's Research Archive Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link href="/favicon.ico" rel="shortcut icon" type="/assets/imgs/favicon.ico"/>
+  
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$'] ],
+    processEscapes: true,
+  }
+});
+MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-logo" href="/"><img src="/assets/imgs/logo.png" alt="NO SHOW"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/" >Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/category/" >Category</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Bi-linear CNN models for fine-grained visual recognition">
+    <meta itemprop="description" content="Key pointBilinear CNN utilizes the orderless descriptors which are more powerful to solve the texture classification than the orderful descriptors which store the additional spatial information.">
+    <meta itemprop="datePublished" content="2020-04-02T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Bi-linear CNN models for fine-grained visual recognition
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 분 소요
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="key-point">Key point</h2>
+<p>Bilinear CNN utilizes the orderless descriptors which are more powerful to solve the texture classification than the orderful descriptors which store the additional spatial information.</p>
+
+<h2 id="summary">Summary</h2>
+<p>Generally, CNN architecture for image classification is composed of convolutional layer and fully connected (FC) layer. At first, conv layer extracts the feature maps (CxHxW shape) from an image, where C is # channels, and H and W are the height and width of the extracted feature maps, respectively. After this, these feature maps are unrolled into 1-D vector, and then they are input to the FC layers; for example, 512x7x7 feature maps are flattened into 25088 neurons and mapped into 4096 feature vectors by FC layer.</p>
+
+<p>The important point is that each neuron from feature map corresponds to the region of the image. Therefore, each neuron can be considered as the descriptor unit for the certain region of the image due to the subsampling process. Since each bit/unit stores spatial information additionally, it can be inferred that less fine-grained information are stored in the orderful descriptors due to the trade-off mechanism. On the other hand, in the fine-grained visual recognition (FGVR) task, the spatial information is not much required but more texture information is valuable. Fisher vector (FV), VLAD and O2P are the orderless descriptors and they outperform FC in FGVR task. Bi-linear CNN model is proposed to train in end-to-end manner to learn the orderless descriptors.</p>
+
+<p>The below diagram shows the Bi-linear CNN architecture briefly. It contains two CNNs that extract two feature maps, F_A and F_B. Then, F_A and F_B are reshaped into the shape of C<em>M and C</em>N matrices, respectively. The outer product of these two results in CxMxN matrices which are sum up in axis=0 to give a single MxN matrix. After these steps, MxN matrix is flattened into 1-D vector and input to the softmax layer.</p>
+
+<p><img src="/assets/imgs/TY_Lin(2015)/arch.PNG" alt="Bi-linear CNN architecture" /></p>
+
+<p>Later, I will add more detailed information, such as the backpropagation for outer product of matrices.</p>
+
+<h2 id="references">References</h2>
+<p><a href="https://medium.com/@ahmdtaha/bilinear-cnn-models-for-fine-grained-visual-recognition-b25ba24d3147">https://medium.com/@ahmdtaha/bilinear-cnn-models-for-fine-grained-visual-recognition-b25ba24d3147</a></p>
+
+<p><a href="http://vis-www.cs.umass.edu/bcnn/docs/bcnn_iccv15.pdf">http://vis-www.cs.umass.edu/bcnn/docs/bcnn_iccv15.pdf</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#cnn-arch" class="page__taxonomy-item" rel="tag">CNN arch</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#fine-grained-visual-recognition" class="page__taxonomy-item" rel="tag">Fine-grained Visual recognition</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#computer-vision" class="page__taxonomy-item" rel="tag">Computer_Vision</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-04-02T00:00:00+09:00">April 2, 2020</time></p>
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">이전</a>
+    
+    
+      <a href="/multimodal-learning/VIOLIN-A-Large_Scale-Dataset-for-Video-and-Language-Inference/" class="pagination--pager" title="VIOLIN – A large Scale Dataset for video and language inference
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/HYUNJS" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 HYUN, Jeongseok. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

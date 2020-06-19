@@ -1,0 +1,438 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>VIOLIN – A large Scale Dataset for video and language inference - 정석’s Research Archive</title>
+<meta name="description" content="Introduction Natural language inference (NLI) is the task judging entailment and contradiction relations between premise and hypothesis sentences. e.g. positive/negative between two sentences  ">
+
+
+  <meta name="author" content="HYUN, Jeongseok">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="정석's Research Archive">
+<meta property="og:title" content="VIOLIN – A large Scale Dataset for video and language inference">
+<meta property="og:url" content="http://localhost:4000/multimodal-learning/VIOLIN-A-Large_Scale-Dataset-for-Video-and-Language-Inference/">
+
+
+  <meta property="og:description" content="Introduction Natural language inference (NLI) is the task judging entailment and contradiction relations between premise and hypothesis sentences. e.g. positive/negative between two sentences  ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-04-04T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/multimodal-learning/VIOLIN-A-Large_Scale-Dataset-for-Video-and-Language-Inference/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "HYUN, Jeongseok",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="정석's Research Archive Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link href="/favicon.ico" rel="shortcut icon" type="/assets/imgs/favicon.ico"/>
+  
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$'] ],
+    processEscapes: true,
+  }
+});
+MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-logo" href="/"><img src="/assets/imgs/logo.png" alt="NO SHOW"></a>
+        
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/" >Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/category/" >Category</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="VIOLIN – A large Scale Dataset for video and language inference">
+    <meta itemprop="description" content="IntroductionNatural language inference (NLI) is the task judging entailment and contradiction relations between premise and hypothesis sentences. e.g. positive/negative between two sentences">
+    <meta itemprop="datePublished" content="2020-04-04T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">VIOLIN – A large Scale Dataset for video and language inference
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 분 소요
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="introduction">Introduction</h2>
+<p>Natural language inference (NLI) is the task judging entailment and contradiction relations between premise and hypothesis sentences. e.g. positive/negative between two sentences</p>
+
+<p>Visual Entailment (VE) is similar to NLI, but the difference is the premise is image. Thus, the goal of this task is to judge whether the textual hypothesis can be confirmed based on the visual content in the image.</p>
+
+<p>The task proposed in this paper is to judge the textual hypothesis based on the combination of video and its subtitles. Therefore, this is more advanced multimodal task than VE.</p>
+
+<p>In this paper, a new large scale of dataset for this task is proposed and testing results of multimodal architecture utilizing existing models are given.</p>
+
+<h2 id="why-our-proposed-task-is-challenging">Why our proposed task is challenging?</h2>
+<p>Deep understanding of videos is difficult due to following reasons:</p>
+<ol>
+  <li>videos contain the complex temporal dynamics and relationship between different visual scenes</li>
+  <li>our dataset is collected from TV shows and movie clips, which contain rich social interactions and diverse scenes. This requires a model to not only understand explicit visual cues, but also infer in-depth rationale behind the scenes</li>
+  <li>VE task which dataset is less sophisticated sentence as it only contains factual description that can be explicitly derived from the visual content in the image. On the other hand, VIOLIN mainly consists of implicit statements that cannot be solved without in-depth understanding of the video and text.</li>
+</ol>
+
+<p>Therefore, VIOLIN is designed specifically to evaluate a model’s multimodal reasoning skills.</p>
+
+<h2 id="overview-of-dataset">Overview of Dataset</h2>
+<p>f(V,S,H) -&gt; {0,1} where V is video clip consisting of a sequence of video frames <script type="math/tex">{ \{ v_{i} \} }^{T}_{i=1}</script>, paired with its aligned text <script type="math/tex">S = {\{ s_i, t^{(0)}_i, t^{(1)}_i \} }^n_{i=1}</script> (<script type="math/tex">s_i</script> is the subtitle within time span <script type="math/tex">(t^{(0)}_i \rightarrow t^{(1)}_i)</script> in the video) and a natural language statement $ H $ as the hypothesis aiming to describe the video clip.</p>
+
+<p>For every (V,S,H) triplet, a system needs to perform binary classification: f(V,S,H) -&gt; {0,1}, deciding whether the statement $ H $ is entailed (label 1) from or contradicts (label 0) the given video clip.</p>
+
+<p>Diverse sources are used (4 popular TV shows of different genres and YouTube movie Clips from thousands of movies) so that the dataset has high coverage and versatility.</p>
+
+<p>The below figure shows the comparison between VIOLIN and other existing vision-and-language datasets. VIOLIN is the first dataset that provides both video and subtitles to accomplish NLI. Therefore, the solution model needs to encode all three different types of data: video, subtitles and statement, and then, it performs the binary classification.</p>
+
+<p><img src="/assets/imgs/J_Lin(2020)/1.png" alt="1.jpg" /></p>
+
+<p>VIOLIN is composed of various types of statement as shown in the below diagram. While visual recognition, identifying character and action recognition are more focused on explicit information, human dynamics, conversation reasoning and inferring reasons are requiring an additional implicit information. Human dynamics includes inferring human emotions/relations/intentions. Conversation reasoning is that performing inference over characters’ dialogues and other forms of interactions (body language, hand gestures, etc). inferring reason is about inferring causal relations in complex events.</p>
+
+<p>Thus, the former types of statement require relatively low-level reasoning, whereas the latter types of statement require in-depth understanding and commonsense reasoning. Overall, 54% of the dataset is explicit information recognition and common-sense reasoning takes up the remaining 46%.</p>
+
+<p>One of the emphasized points of VIOLIN is that it is more focused on reasoning rather than surface-level grounding; In TVQA, only 8.5% of the questions require reasoning.</p>
+
+<p><img src="/assets/imgs/J_Lin(2020)/2.png" alt="2.jpg" /></p>
+
+<h2 id="model-architecture">Model Architecture</h2>
+<p>The model composed of two encoders: video encoder and text encoder. Video features, statement features and subtitles features are extracted by sing these encoders, and then, fusion modules combine these cross modal features. Finally, the final bi-LSTM layer and fc layer are located. 1-dim output from the fc layer input to the sigmoid activation function so that the probability of the input statement being positive is computed.</p>
+
+<p><img src="/assets/imgs/J_Lin(2020)/3.png" alt="3.jpg" /></p>
+
+<p><strong>Preprocess of video data:</strong>
+The videos are down-sampled to 3 fps for image-level feature extraction, while C3D features are extracted for every 16 frames from the original video without down-sampling.</p>
+
+<p>The video encoder firstly extracts the visual features <script type="math/tex">V \in \mathbb{R}^{^{T \times d_v}}</script>, where <script type="math/tex">T</script> is # time steps, and <script type="math/tex">d_v</script> is the dim of feature vector by 3 approaches:</p>
+<ol>
+  <li>image feature using ResNet101 trained on ImageNet to extract the global image feature for each frame
+    <ul>
+      <li>2048-dim feature vector from the last avg pool layer.</li>
+    </ul>
+  </li>
+  <li>detection feature using Faster R-CNN trained on Visual Genome to extract the detected objects’ regional features for each frame
+    <ul>
+      <li>2048-dim feature vector. After ROI Pooling layer, the feature vector is (512x7x7,4096), but the exact method to extract 2048-dim is not mentioned in the paper.</li>
+    </ul>
+  </li>
+  <li>video feature using C3D (3D conv net) to extract spatial-temporal video feature for each small clip of video
+    <ul>
+      <li>4096-dim feature vector</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Then, bi-directional LSTM captures the temporal correlation among consecutive frames and extracts video representation <script type="math/tex">H_V \in \mathbb{R}^{T \times 2d}</script>, where d is dim of LSTM encoder hidden-state which is built by concatenating the last hidden state of LSTM from both directions.</p>
+
+<p><img src="/assets/imgs/J_Lin(2020)/4.png" alt="4.jpg" /></p>
+
+<p><strong>Preprocess of text data:</strong>
+Both statement and subtitle are tokenized into a word sequence <script type="math/tex">{\{ w_i\} }^{n_{stmt}}_{i=1}</script> and <script type="math/tex">{\{ u_i\} }^{n_{subtt}}_{i=1}</script> , where <script type="math/tex">n_{stmt}</script> and <script type="math/tex">n_{subtt}</script> are lengths of statement and subtitle, respectively. All the lines are tokenized and concatenated into one single sequence.</p>
+
+<p>The same text encoder is used to extract the feature from statement and subtitles. LSTM encoder, which does not consider contextual info, and BERT encoder are experimented. LSTM encoder (i.e. GloVe), converts word tokens to their embeddings, and then produces text representations <script type="math/tex">H_{stmt} \in \mathbb{R}^{n_{stmt} \times 2d}</script> and <script type="math/tex">H_{subtt} \in \mathbb{R}^{n_{subtt} \times 2d}</script>. BERT encoder is initially finetuned on VIOLIN. Its output at each position is 768-dim so it is projected to 2d dimensions. However, the method of projection is not stated by the author.</p>
+
+<h2 id="combining-multimodality-streams">Combining Multimodality Streams</h2>
+<p>Statement representations are jointly modeled with video and subtitles via a shared fusion module, which is implemented with bidirectional attention following the mechanism of query-context matching. For example, statement representations <script type="math/tex">H_{stmt} \in \mathbb{R}^{^{n_{stml}} \times 2d}</script> are used as context, and video representations <script type="math/tex">H_V \in \mathbb{R}^{T \times 2d}</script> as query since the full statement needs to be supported by evidence from either video or subtitles. Thus, each word in the statement attends to every time step in the video representations. This attention weights are mathematcially expressed as:</p>
+
+<p>Let <script type="math/tex">a_i \in \mathbb{R}^T</script> be attention weights for the i-th word in the statement, <script type="math/tex">\sum^{T}_{j=1}a_{i,j}=1 \text{ for all } i=1,…,n_{stmt}, a \in \mathbb{R}^{n_{stmt} \times T}</script></p>
+
+<p>Using this video-statement attention weights, a video-aware statement representation can be computed: <script type="math/tex">M^V_{stmt}=aH_V \in \mathbb{R}^{n_{stmt} \times 2d}</script>. Likewise, subtitle-aware statement representation <script type="math/tex">M^{subtt}_{stmt}</script> can be copmuted. Finally, these two sets of representations are fused to result matrix <script type="math/tex">M^{all}_{stmt} \in \mathbb{R}^{n_{stmt} \times 10d}</script>, and then this matrix is fed into the final bidirectional LSTM:</p>
+
+<script type="math/tex; mode=display">M^{all}_{stmt} = [H_{stmt}; M^V_{stmt}; M^{subtt}_{stmt}; H_{stmt} \odot M^V_{stmt}; H_{stmt} \odot M^{subtt}_{stmt} ]</script>
+
+<p>In addition, the author evaluates the pre-trained model LXMERT that jointly learns multimodal features. In this model, the visual input is input rather than video. the middle frame of the corresponding video segment was used.</p>
+
+<p><img src="/assets/imgs/J_Lin(2020)/5.png" alt="5.jpg" /></p>
+
+<h2 id="evaluations">Evaluations</h2>
+<p>Testing results show that adding visual features to the model only slightly improved the accuracy, while human predicts much better with the additional video input. Also, according to Table 6, statements of visual recognition do not improve with the additional video input, and the accuracy of human dynamics statements is even decreased. Therefore, we can conclude that the fusion of visual data and text data is not well achieved for the existing models. LXMERT is only using single frame rather than the video, so this point can be the consideration of low accuracy.</p>
+
+<p>Possible future directions are suggested by authors:</p>
+<ol>
+  <li>developing models to localize key frames</li>
+  <li>better utilizing the alignment between video and subtitles to improve reasoning ability.</li>
+</ol>
+
+<p><img src="/assets/imgs/J_Lin(2020)/6.png" alt="6.jpg" /></p>
+
+<p><img src="/assets/imgs/J_Lin(2020)/7.png" alt="7.jpg" /></p>
+
+<p><img src="/assets/imgs/J_Lin(2020)/8.png" alt="8.jpg" /></p>
+
+<p><img src="/assets/imgs/J_Lin(2020)/9.png" alt="9.jpg" /></p>
+
+<h2 id="references">References</h2>
+<p><a href="https://arxiv.org/pdf/2003.11618.pdf">[1] J. Lin, et al., “VIOLIN: A Large-Scale Dataset for Video-and-Language Inference”, arXiv:2003.11618v1 [cs.CV] </a></p>
+
+<p><a href="https://arxiv.org/pdf/1908.07490.pdf">[2] H. Tan, M. Bansal, “LXMERT: Learning Cross-Modality Encoder Representations from Transformers”, arXiv:1908.07490v3 [cs.CL]  </a></p>
+
+<p><a href="http://ethereon.github.io/netscope/#/gist/b21e2aae116dc1ac7b50">[3] Visualization of ResNet-101 </a></p>
+
+<p><a href="https://github.com/mitmul/chainer-faster-rcnn">[4] Visualization of Fater R-CNN </a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#dataset" class="page__taxonomy-item" rel="tag">Dataset</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#multimodal-learning" class="page__taxonomy-item" rel="tag">Multimodal-learning</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-04-04T00:00:00+09:00">April 4, 2020</time></p>
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/computer_vision/bilinear-CNN-Models-for-Fine-grained-Visual-Recognition/" class="pagination--pager" title="Bi-linear CNN models for fine-grained visual recognition
+">이전</a>
+    
+    
+      <a href="/statistics/wasserstein-distance/" class="pagination--pager" title="What is wassertein distance?
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/HYUNJS" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 HYUN, Jeongseok. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

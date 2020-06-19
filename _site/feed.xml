@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-19T12:29:53+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">정석’s Research Archive</title><subtitle>This is a website to record what I learned</subtitle><author><name>HYUN, Jeongseok</name></author><entry><title type="html">VIOLIN – A large Scale Dataset for video and language inference</title><link href="http://localhost:4000/multimodal-learning/VIOLIN-A-Large_Scale-Dataset-for-Video-and-Language-Inference/" rel="alternate" type="text/html" title="VIOLIN – A large Scale Dataset for video and language inference" /><published>2020-04-04T00:00:00+09:00</published><updated>2020-04-04T00:00:00+09:00</updated><id>http://localhost:4000/multimodal-learning/VIOLIN-A-Large_Scale-Dataset-for-Video-and-Language-Inference</id><content type="html" xml:base="http://localhost:4000/multimodal-learning/VIOLIN-A-Large_Scale-Dataset-for-Video-and-Language-Inference/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Natural language inference (NLI) is the task judging entailment and contradiction relations between premise and hypothesis sentences. e.g. positive/negative between two sentences&lt;/p&gt;
+
+&lt;p&gt;Visual Entailment (VE) is similar to NLI, but the difference is the premise is image. Thus, the goal of this task is to judge whether the textual hypothesis can be confirmed based on the visual content in the image.&lt;/p&gt;
+
+&lt;p&gt;The task proposed in this paper is to judge the textual hypothesis based on the combination of video and its subtitles. Therefore, this is more advanced multimodal task than VE.&lt;/p&gt;
+
+&lt;p&gt;In this paper, a new large scale of dataset for this task is proposed and testing results of multimodal architecture utilizing existing models are given.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-our-proposed-task-is-challenging&quot;&gt;Why our proposed task is challenging?&lt;/h2&gt;
+&lt;p&gt;Deep understanding of videos is difficult due to following reasons:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;videos contain the complex temporal dynamics and relationship between different visual scenes&lt;/li&gt;
+  &lt;li&gt;our dataset is collected from TV shows and movie clips, which contain rich social interactions and diverse scenes. This requires a model to not only understand explicit visual cues, but also infer in-depth rationale behind the scenes&lt;/li&gt;
+  &lt;li&gt;VE task which dataset is less sophisticated sentence as it only contains factual description that can be explicitly derived from the visual content in the image. On the other hand, VIOLIN mainly consists of implicit statements that cannot be solved without in-depth understanding of the video and text.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Therefore, VIOLIN is designed specifically to evaluate a model’s multimodal reasoning skills.&lt;/p&gt;
+
+&lt;h2 id=&quot;overview-of-dataset&quot;&gt;Overview of Dataset&lt;/h2&gt;
+&lt;p&gt;f(V,S,H) -&amp;gt; {0,1} where V is video clip consisting of a sequence of video frames &lt;script type=&quot;math/tex&quot;&gt;{ \{ v_{i} \} }^{T}_{i=1}&lt;/script&gt;, paired with its aligned text &lt;script type=&quot;math/tex&quot;&gt;S = {\{ s_i, t^{(0)}_i, t^{(1)}_i \} }^n_{i=1}&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;s_i&lt;/script&gt; is the subtitle within time span &lt;script type=&quot;math/tex&quot;&gt;(t^{(0)}_i \rightarrow t^{(1)}_i)&lt;/script&gt; in the video) and a natural language statement $ H $ as the hypothesis aiming to describe the video clip.&lt;/p&gt;
+
+&lt;p&gt;For every (V,S,H) triplet, a system needs to perform binary classification: f(V,S,H) -&amp;gt; {0,1}, deciding whether the statement $ H $ is entailed (label 1) from or contradicts (label 0) the given video clip.&lt;/p&gt;
+
+&lt;p&gt;Diverse sources are used (4 popular TV shows of different genres and YouTube movie Clips from thousands of movies) so that the dataset has high coverage and versatility.&lt;/p&gt;
+
+&lt;p&gt;The below figure shows the comparison between VIOLIN and other existing vision-and-language datasets. VIOLIN is the first dataset that provides both video and subtitles to accomplish NLI. Therefore, the solution model needs to encode all three different types of data: video, subtitles and statement, and then, it performs the binary classification.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/imgs/J_Lin(2020)/1.png&quot; alt=&quot;1.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;VIOLIN is composed of various types of statement as shown in the below diagram. While visual recognition, identifying character and action recognition are more focused on explicit information, human dynamics, conversation reasoning and inferring reasons are requiring an additional implicit information. Human dynamics includes inferring human emotions/relations/intentions. Conversation reasoning is that performing inference over characters’ dialogues and other forms of interactions (body language, hand gestures, etc). inferring reason is about inferring causal relations in complex events.&lt;/p&gt;
+
+&lt;p&gt;Thus, the former types of statement require relatively low-level reasoning, whereas the latter types of statement require in-depth understanding and commonsense reasoning. Overall, 54% of the dataset is explicit information recognition and common-sense reasoning takes up the remaining 46%.&lt;/p&gt;
+
+&lt;p&gt;One of the emphasized points of VIOLIN is that it is more focused on reasoning rather than surface-level grounding; In TVQA, only 8.5% of the questions require reasoning.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/imgs/J_Lin(2020)/2.png&quot; alt=&quot;2.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-architecture&quot;&gt;Model Architecture&lt;/h2&gt;
+&lt;p&gt;The model composed of two encoders: video encoder and text encoder. Video features, statement features and subtitles features are extracted by sing these encoders, and then, fusion modules combine these cross modal features. Finally, the final bi-LSTM layer and fc layer are located. 1-dim output from the fc layer input to the sigmoid activation function so that the probability of the input statement being positive is computed.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/imgs/J_Lin(2020)/3.png&quot; alt=&quot;3.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Preprocess of video data:&lt;/strong&gt;
+The videos are down-sampled to 3 fps for image-level feature extraction, while C3D features are extracted for every 16 frames from the original video without down-sampling.&lt;/p&gt;
+
+&lt;p&gt;The video encoder firstly extracts the visual features &lt;script type=&quot;math/tex&quot;&gt;V \in \mathbb{R}^{^{T \times d_v}}&lt;/script&gt;, where &lt;script type=&quot;math/tex&quot;&gt;T&lt;/script&gt; is # time steps, and &lt;script type=&quot;math/tex&quot;&gt;d_v&lt;/script&gt; is the dim of feature vector by 3 approaches:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;image feature using ResNet101 trained on ImageNet to extract the global image feature for each frame
+    &lt;ul&gt;
+      &lt;li&gt;2048-dim feature vector from the last avg pool layer.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;detection feature using Faster R-CNN trained on Visual Genome to extract the detected objects’ regional features for each frame
+    &lt;ul&gt;
+      &lt;li&gt;2048-dim feature vector. After ROI Pooling layer, the feature vector is (512x7x7,4096), but the exact method to extract 2048-dim is not mentioned in the paper.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;video feature using C3D (3D conv net) to extract spatial-temporal video feature for each small clip of video
+    &lt;ul&gt;
+      &lt;li&gt;4096-dim feature vector&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Then, bi-directional LSTM captures the temporal correlation among consecutive frames and extracts video representation &lt;script type=&quot;math/tex&quot;&gt;H_V \in \mathbb{R}^{T \times 2d}&lt;/script&gt;, where d is dim of LSTM encoder hidden-state which is built by concatenating the last hidden state of LSTM from both directions.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/imgs/J_Lin(2020)/4.png&quot; alt=&quot;4.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Preprocess of text data:&lt;/strong&gt;
+Both statement and subtitle are tokenized into a word sequence &lt;script type=&quot;math/tex&quot;&gt;{\{ w_i\} }^{n_{stmt}}_{i=1}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;{\{ u_i\} }^{n_{subtt}}_{i=1}&lt;/script&gt; , where &lt;script type=&quot;math/tex&quot;&gt;n_{stmt}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;n_{subtt}&lt;/script&gt; are lengths of statement and subtitle, respectively. All the lines are tokenized and concatenated into one single sequence.&lt;/p&gt;
+
+&lt;p&gt;The same text encoder is used to extract the feature from statement and subtitles. LSTM encoder, which does not consider contextual info, and BERT encoder are experimented. LSTM encoder (i.e. GloVe), converts word tokens to their embeddings, and then produces text representations &lt;script type=&quot;math/tex&quot;&gt;H_{stmt} \in \mathbb{R}^{n_{stmt} \times 2d}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;H_{subtt} \in \mathbb{R}^{n_{subtt} \times 2d}&lt;/script&gt;. BERT encoder is initially finetuned on VIOLIN. Its output at each position is 768-dim so it is projected to 2d dimensions. However, the method of projection is not stated by the author.&lt;/p&gt;
+
+&lt;h2 id=&quot;combining-multimodality-streams&quot;&gt;Combining Multimodality Streams&lt;/h2&gt;
+&lt;p&gt;Statement representations are jointly modeled with video and subtitles via a shared fusion module, which is implemented with bidirectional attention following the mechanism of query-context matching. For example, statement representations &lt;script type=&quot;math/tex&quot;&gt;H_{stmt} \in \mathbb{R}^{^{n_{stml}} \times 2d}&lt;/script&gt; are used as context, and video representations &lt;script type=&quot;math/tex&quot;&gt;H_V \in \mathbb{R}^{T \times 2d}&lt;/script&gt; as query since the full statement needs to be supported by evidence from either video or subtitles. Thus, each word in the statement attends to every time step in the video representations. This attention weights are mathematcially expressed as:&lt;/p&gt;
+
+&lt;p&gt;Let &lt;script type=&quot;math/tex&quot;&gt;a_i \in \mathbb{R}^T&lt;/script&gt; be attention weights for the i-th word in the statement, &lt;script type=&quot;math/tex&quot;&gt;\sum^{T}_{j=1}a_{i,j}=1 \text{ for all } i=1,…,n_{stmt}, a \in \mathbb{R}^{n_{stmt} \times T}&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;Using this video-statement attention weights, a video-aware statement representation can be computed: &lt;script type=&quot;math/tex&quot;&gt;M^V_{stmt}=aH_V \in \mathbb{R}^{n_{stmt} \times 2d}&lt;/script&gt;. Likewise, subtitle-aware statement representation &lt;script type=&quot;math/tex&quot;&gt;M^{subtt}_{stmt}&lt;/script&gt; can be copmuted. Finally, these two sets of representations are fused to result matrix &lt;script type=&quot;math/tex&quot;&gt;M^{all}_{stmt} \in \mathbb{R}^{n_{stmt} \times 10d}&lt;/script&gt;, and then this matrix is fed into the final bidirectional LSTM:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;M^{all}_{stmt} = [H_{stmt}; M^V_{stmt}; M^{subtt}_{stmt}; H_{stmt} \odot M^V_{stmt}; H_{stmt} \odot M^{subtt}_{stmt} ]&lt;/script&gt;
+
+&lt;p&gt;In addition, the author evaluates the pre-trained model LXMERT that jointly learns multimodal features. In this model, the visual input is input rather than video. the middle frame of the corresponding video segment was used.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/imgs/J_Lin(2020)/5.png&quot; alt=&quot;5.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;evaluations&quot;&gt;Evaluations&lt;/h2&gt;
+&lt;p&gt;Testing results show that adding visual features to the model only slightly improved the accuracy, while human predicts much better with the additional video input. Also, according to Table 6, statements of visual recognition do not improve with the additional video input, and the accuracy of human dynamics statements is even decreased. Therefore, we can conclude that the fusion of visual data and text data is not well achieved for the existing models. LXMERT is only using single frame rather than the video, so this point can be the consideration of low accuracy.&lt;/p&gt;
+
+&lt;p&gt;Possible future directions are suggested by authors:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;developing models to localize key frames&lt;/li&gt;
+  &lt;li&gt;better utilizing the alignment between video and subtitles to improve reasoning ability.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/imgs/J_Lin(2020)/6.png&quot; alt=&quot;6.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/imgs/J_Lin(2020)/7.png&quot; alt=&quot;7.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/imgs/J_Lin(2020)/8.png&quot; alt=&quot;8.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/imgs/J_Lin(2020)/9.png&quot; alt=&quot;9.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/2003.11618.pdf&quot;&gt;[1] J. Lin, et al., “VIOLIN: A Large-Scale Dataset for Video-and-Language Inference”, arXiv:2003.11618v1 [cs.CV] &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1908.07490.pdf&quot;&gt;[2] H. Tan, M. Bansal, “LXMERT: Learning Cross-Modality Encoder Representations from Transformers”, arXiv:1908.07490v3 [cs.CL]  &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://ethereon.github.io/netscope/#/gist/b21e2aae116dc1ac7b50&quot;&gt;[3] Visualization of ResNet-101 &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/mitmul/chainer-faster-rcnn&quot;&gt;[4] Visualization of Fater R-CNN &lt;/a&gt;&lt;/p&gt;</content><author><name>HYUN, Jeongseok</name></author><category term="Dataset" /><summary type="html">Introduction Natural language inference (NLI) is the task judging entailment and contradiction relations between premise and hypothesis sentences. e.g. positive/negative between two sentences</summary></entry><entry><title type="html">What is wassertein distance?</title><link href="http://localhost:4000/statistics/wasserstein-distance/" rel="alternate" type="text/html" title="What is wassertein distance?" /><published>2020-04-04T00:00:00+09:00</published><updated>2020-04-04T00:00:00+09:00</updated><id>http://localhost:4000/statistics/wasserstein-distance</id><content type="html" xml:base="http://localhost:4000/statistics/wasserstein-distance/">&lt;p&gt;Will update soon&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\min_{G}&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\min_{G} \max_{D} { V\left( D,G \right) }&lt;/script&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://medium.com/@jonathan_hui/gan-wasserstein-gan-wgan-gp-6a1a2aa1b490&quot;&gt;https://medium.com/@jonathan_hui/gan-wasserstein-gan-wgan-gp-6a1a2aa1b490&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1701.07875.pdf&quot;&gt;https://arxiv.org/pdf/1701.07875.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1704.00028.pdf&quot;&gt;https://arxiv.org/pdf/1704.00028.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;https://dogfoottech.tistory.com/185
+https://www.slideshare.net/ssuser7e10e4/wasserstein-gan-i&lt;/p&gt;
+
+&lt;p&gt;https://ratsgo.github.io/generative%20model/2017/12/20/gan/
+https://github.com/ratsgo/ratsgo.github.io/blob/master/_posts/2017-12-20-gan.md&lt;/p&gt;</content><author><name>HYUN, Jeongseok</name></author><category term="distance metrics" /><summary type="html">Will update soon</summary></entry><entry><title type="html">Bi-linear CNN models for fine-grained visual recognition</title><link href="http://localhost:4000/computer_vision/bilinear-CNN-Models-for-Fine-grained-Visual-Recognition/" rel="alternate" type="text/html" title="Bi-linear CNN models for fine-grained visual recognition" /><published>2020-04-02T00:00:00+09:00</published><updated>2020-04-02T00:00:00+09:00</updated><id>http://localhost:4000/computer_vision/bilinear-CNN-Models-for-Fine-grained-Visual-Recognition</id><content type="html" xml:base="http://localhost:4000/computer_vision/bilinear-CNN-Models-for-Fine-grained-Visual-Recognition/">&lt;h2 id=&quot;key-point&quot;&gt;Key point&lt;/h2&gt;
+&lt;p&gt;Bilinear CNN utilizes the orderless descriptors which are more powerful to solve the texture classification than the orderful descriptors which store the additional spatial information.&lt;/p&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;Generally, CNN architecture for image classification is composed of convolutional layer and fully connected (FC) layer. At first, conv layer extracts the feature maps (CxHxW shape) from an image, where C is # channels, and H and W are the height and width of the extracted feature maps, respectively. After this, these feature maps are unrolled into 1-D vector, and then they are input to the FC layers; for example, 512x7x7 feature maps are flattened into 25088 neurons and mapped into 4096 feature vectors by FC layer.&lt;/p&gt;
+
+&lt;p&gt;The important point is that each neuron from feature map corresponds to the region of the image. Therefore, each neuron can be considered as the descriptor unit for the certain region of the image due to the subsampling process. Since each bit/unit stores spatial information additionally, it can be inferred that less fine-grained information are stored in the orderful descriptors due to the trade-off mechanism. On the other hand, in the fine-grained visual recognition (FGVR) task, the spatial information is not much required but more texture information is valuable. Fisher vector (FV), VLAD and O2P are the orderless descriptors and they outperform FC in FGVR task. Bi-linear CNN model is proposed to train in end-to-end manner to learn the orderless descriptors.&lt;/p&gt;
+
+&lt;p&gt;The below diagram shows the Bi-linear CNN architecture briefly. It contains two CNNs that extract two feature maps, F_A and F_B. Then, F_A and F_B are reshaped into the shape of C&lt;em&gt;M and C&lt;/em&gt;N matrices, respectively. The outer product of these two results in CxMxN matrices which are sum up in axis=0 to give a single MxN matrix. After these steps, MxN matrix is flattened into 1-D vector and input to the softmax layer.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/imgs/TY_Lin(2015)/arch.PNG&quot; alt=&quot;Bi-linear CNN architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Later, I will add more detailed information, such as the backpropagation for outer product of matrices.&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://medium.com/@ahmdtaha/bilinear-cnn-models-for-fine-grained-visual-recognition-b25ba24d3147&quot;&gt;https://medium.com/@ahmdtaha/bilinear-cnn-models-for-fine-grained-visual-recognition-b25ba24d3147&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://vis-www.cs.umass.edu/bcnn/docs/bcnn_iccv15.pdf&quot;&gt;http://vis-www.cs.umass.edu/bcnn/docs/bcnn_iccv15.pdf&lt;/a&gt;&lt;/p&gt;</content><author><name>HYUN, Jeongseok</name></author><category term="Fine-grained Visual recognition" /><category term="CNN arch" /><summary type="html">Key point Bilinear CNN utilizes the orderless descriptors which are more powerful to solve the texture classification than the orderful descriptors which store the additional spatial information.</summary></entry></feed>
