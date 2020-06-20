@@ -7,13 +7,13 @@ minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "n
 
 # Site Settings
 locale                   : "ko-KR" #"en-US"
-title                    : "정석's Research Archive"
+title                    : "Jung Yoon's Personal Webpage"
 title_separator          : "-"
 subtitle                 : ""
 # subtitle                 : "To record what I learned" # site tagline that appears below site title in masthead
-name                     : "HYUN, Jeongseok"
-description              : "This is a website to record what I learned"
-url                      : "https://hyunjs.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+name                     : "KIM, Jung Yoon"
+description              : "This is a website for my personal records"
+url                      : "https://jykim9209.github.io/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : ""  # the subpath of your site, e.g. "/blog"
 repository               : "HYUNJS/hyunjs.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes" 
 teaser                   : "" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
