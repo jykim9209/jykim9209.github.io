@@ -10,7 +10,7 @@ layout: home
 permalink: /
 # header:
 #   overlay_color: "#5e616c"
-#   overlay_image: "/assets/imgs/milky-way.jpg"
+#   overlay_image: "/assets/imgs/grey.jpg"
   # title: "Daily Review"
   # caption:
   # excerpt: "Start from 2020/02/15"

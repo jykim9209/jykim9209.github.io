@@ -31,6 +31,9 @@
 <loc>http://localhost:4000/_pages/home_prev/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/example/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/_pages/blog.html</loc>
 <lastmod>2020-06-19T11:59:09+09:00</lastmod>
 </url>
