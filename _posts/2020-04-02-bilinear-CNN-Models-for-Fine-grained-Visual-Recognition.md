@@ -6,6 +6,7 @@ tags:
   - Fine-grained Visual recognition
   - CNN arch
 ---
+
 ## Key point
 Bilinear CNN utilizes the orderless descriptors which are more powerful to solve the texture classification than the orderful descriptors which store the additional spatial information.
 

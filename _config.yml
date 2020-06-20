@@ -99,15 +99,15 @@ analytics:
 
 # Site Author
 author:
-  name             : "HYUN, Jeongseok"
+  name             : "KIM, Jung Yoon"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "HKUST Computer Engineering <br> UG Final Year Student"
+  bio              : "HKUST Economics and Finance <br> UG Year 3"
   location         : "KR | HK"
   #email            : ""
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: mailto:jhyunaa@connect.ust.hk
+      url: mailto:jykim9209@connect.ust.hk
     #- label: "Website"
     #  icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
